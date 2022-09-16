@@ -7,12 +7,13 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-  .setTitle('Todo Mobile')
-  .setDescription('Projeto Todo Mobile')
-  .setContact("Henrique Felipe","http://www.generationbrasil.online","generation@email.com")
+  .setTitle('To do List')
+  .setDescription('Criação de uma lista de tarefas')
+  .setContact("Bruna Xavier","http://www.generationbrasil.online","brunavxr@gmail.com")
   .setVersion('1.0')
   .addBearerAuth()
   .build()
+  
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('/swagger', app, document)
 
@@ -20,6 +21,6 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe())
   app.enableCors()
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
